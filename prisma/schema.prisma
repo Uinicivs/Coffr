@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Wallet {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?  @db.Text
+  wallet      Float?   @default(0)
+  target      Float
+  endDate     DateTime
+  createdAt   DateTime @default(now()) @ignore
+  updatedAt   DateTime @updatedAt @ignore
+}
